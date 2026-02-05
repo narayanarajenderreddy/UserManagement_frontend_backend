@@ -1,8 +1,14 @@
 from fastapi import FastAPI
 from app.db.session import engine
+from app.core import security
+from app.api import auth
 
 
 app = FastAPI(title="User Management API", version="1.0.0")
+
+app.include_router(auth.router)
+
+
 
 @app.get("/health")
 def health_check():
