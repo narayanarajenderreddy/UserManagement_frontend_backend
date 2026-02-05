@@ -10,3 +10,4 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
     mobile_number = Column(String(10), unique=True, nullable=True)
+    role = Column(String, default="user")

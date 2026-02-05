@@ -21,7 +21,11 @@ class UserResponse(BaseModel):
     id:int
     email:EmailStr
     is_active:bool
-    mobile_number:str   
+    mobile_number:str
+
+class CurrentUserResponse(BaseModel):
+    id:int
+    email: EmailStr
     
 
 

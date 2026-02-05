@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from app.db.session import engine
 from app.core import security
-from app.api import auth
+from app.api import auth,user
 
 
 app = FastAPI(title="User Management API", version="1.0.0")
 
 app.include_router(auth.router)
+app.include_router(user.router)
 
 
 

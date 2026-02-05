@@ -27,3 +27,13 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
         algorithm=ALGORITHM
     )
     
+def decode_access_token(token:str):
+    try:
+        payload = jwt.decode(
+            token,
+            settings.db_password,
+            algorithms=[ALGORITHM]
+        )
+        return payload
+    except jwt.JWTError:
+        return None
