@@ -13,7 +13,7 @@ const Login = () => {
 
   const onSubmit = async  (data: LoginForm) => {
     try{
-          console.log("Login data:", data);
+          // console.log("Login data:", data);
           const res = await loginApi(data);
           //console.log(res.data)
           localStorage.setItem("token",res.data.access_token);

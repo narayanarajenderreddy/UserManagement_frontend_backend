@@ -1,15 +1,34 @@
+
+import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
+
 const Dashboard = () => {
+    const {user} = useAuth();
+    //console.log("Dashboard user:",user.data);
     const logout  = () => {
         localStorage.removeItem("token");
         window.location.href = "/login";
     }
     return (
-        <div style = {{padding:20}}>
-            <h1>Dashboard</h1>
-            {/* <p>Welcome!you are logged in.</p> */}
-            <button onClick = {logout}>Logout</button>
-        </div>
-    )
+    <div style={{ padding: 20 }}>
+      <h1>Dashboard</h1>
+
+      <p>Welcome, {user?.email}</p>
+
+      <Link to="/profile">My Profile</Link>
+      <br /><br />
+
+      {user?.role === "admin" && (
+        <>
+          <h3>Admin Section</h3>
+          <button>Manage Users</button>
+        </>
+      )}
+
+      <br /><br />
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
 }
 
 export default Dashboard;
