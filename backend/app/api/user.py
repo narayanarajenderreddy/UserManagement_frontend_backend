@@ -1,3 +1,4 @@
+from urllib import request
 from fastapi import APIRouter, Depends, HTTPException
 from app.api.deps import get_current_user
 from app.db.deps import get_db
@@ -8,6 +9,7 @@ from app.schemas.auth import CurrentUserResponse
 from sqlalchemy.orm import Session
 from app.schemas.user import UserUpdate
 from fastapi import Query
+from fastapi import Request
 
 
 
@@ -55,19 +57,22 @@ def update_user(db:Session = Depends(get_db),admin = Depends(require_role(Roles.
         }
 @router.get("/search")
 def get_all_user(db:Session = Depends(get_db),
-                    admin = Depends(require_role(Roles.ADMIN)),
                     limit:int = Query(10,ge=1,le=100),
                     offset:int = Query(0,ge=0),
                     search:str|None = None,
                     role:str|None = None,
-                    is_active:bool|None = None,): 
+                    is_active:bool|None = None,
+                    ): 
     query = db.query(User)
     if search:
         query = query.filter(User.email.ilike(f"%{search}%"))
+
     if role:
-        query= query.filter(User.role == role)
+        query= query.filter(User.role == role.lower())
+
     if is_active is not None:
         query = query.filter(User.is_active == is_active)
+
     
     
     usercount = query.count()
