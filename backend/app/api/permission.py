@@ -5,7 +5,7 @@ from app.models.user import User
 
 
 def require_role(required_role: str):
-    def role_checker(current_user = Depends(get_current_user)):
+    def role_checker(current_user:User = Depends(get_current_user)):
         if( current_user.role != required_role):
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
