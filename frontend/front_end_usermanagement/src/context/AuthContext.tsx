@@ -3,6 +3,7 @@ import { getUser } from "../api/userApi";
 
 type User = {
   email: string;
+  role:string;
 };
 
 type AuthContextType = {

@@ -19,10 +19,9 @@ const Dashboard = () => {
       <br /><br />
 
       {user?.role === "admin" && (
-        <>
-          <h3>Admin Section</h3>
-          <button>Manage Users</button>
-        </>
+        <div>
+          <Link to="/admin/users">Manage Users</Link>
+        </div>
       )}
 
       <br /><br />
